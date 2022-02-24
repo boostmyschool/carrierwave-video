@@ -31,7 +31,14 @@ module CarrierWave
       end
 
       def encoder_options
-        { preserve_aspect_ratio: @format_options[:preserve_aspect_ratio] || :width }
+        {
+          preserve_aspect_ratio:
+            if @format_options.has_key?(:preserve_aspect_ratio)
+              @format_options[:preserve_aspect_ratio]
+            else
+              :width
+            end,
+        }
       end
 
       # input
